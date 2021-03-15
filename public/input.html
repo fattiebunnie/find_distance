@@ -1,0 +1,17 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<h1>Distance Calculator</h1>
+<form action="calc" method="POST">
+    {% csrf_token %}
+
+    Enter first longitude: <input type="text" name="longitude01"><br><br>
+    Enter first latitude: <input type="text" name="latitude01"><br><br>
+    Enter second longitude: <input type="text" name="longitude02"><br><br>
+    Enter second latitude: <input type="text" name="latitude02"><br><br>
+    <input type="submit">
+</form>
+
+
+{% endblock %}
