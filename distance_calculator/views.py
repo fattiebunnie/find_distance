@@ -24,18 +24,10 @@ class CalculatorView(TemplateView):
 
     
     def calculator (request):
-        # longitude01 = request.POST['longitude01']
-        # latitude01  = request.POST['latitude01']
-        # longitude02 = request.POST['longitude02']
-        # latitude02  = request.POST['latitude02']
-
-        # longitude01 = Calculator.longitude01
-        # latitude01  = Calculator.latitude01
-        # longitude02 = Calculator.longitude02
-        # latitude02  = Calculator.latitude02
 
         form = CalcForm(request.POST)
         if form.is_valid():
+            # save into db
             calculator = form.save(commit= False)
             calculator.save()
             longitude01 = form.cleaned_data['longitude01']
@@ -51,7 +43,6 @@ class CalculatorView(TemplateView):
         else:
             error_message = "invalid input"
             return render(request, "result.html", {"result": error_message})
-            # return redirect('/calc')
 
 
 @csrf_exempt
@@ -98,64 +89,6 @@ def calculator_detail(request, pk):
         calculator.delete()
         return HttpResponse(status=204)
 
-        # EARTH_RADIUS = 6378137
-
-        # if is_number(longitude01) and is_number(longitude02) and is_number(latitude01) and is_number(latitude02):
-        #     longitude01 = math.radians(float(longitude01))
-        #     latitude01  = math.radians(float(latitude01))
-        #     longitude02 = math.radians(float(longitude02))
-        #     latitude02  = math.radians(float(latitude02))
-
-        #     distance = (2 * EARTH_RADIUS 
-        #     * math.asin( math.sqrt(
-        #     ( math.sin(
-        #         ( latitude02 - latitude01 ) / 2
-        #         ) ** 2 ) 
-        #     + (math.cos( latitude01 ) 
-        #     * math.cos( latitude02 ) 
-        #     * (math.sin(( longitude02 - longitude01 ) / 2))**2
-        #     ))))
-        #     return render(request, "result.html", {"result": distance})
-        # else:
-        #     errorMessage = "Please ensure that inputs are integer or floats."
-        #     return render(request, "result.html", {"result": errorMessage})
-
-    # def calculator (request):
-    #     longitude01 = request.POST['longitude01']
-    #     latitude01  = request.POST['latitude01']
-    #     longitude02 = request.POST['longitude02']
-    #     latitude02  = request.POST['latitude02']
-
-    #     # longitude01 = Calculator.longitude01
-    #     # latitude01  = Calculator.latitude01
-    #     # longitude02 = Calculator.longitude02
-    #     # latitude02  = Calculator.latitude02
-
-    #     EARTH_RADIUS = 6378137
-
-    #     if is_number(longitude01) and is_number(longitude02) and is_number(latitude01) and is_number(latitude02):
-    #         longitude01 = math.radians(float(longitude01))
-    #         latitude01  = math.radians(float(latitude01))
-    #         longitude02 = math.radians(float(longitude02))
-    #         latitude02  = math.radians(float(latitude02))
-
-    #         distance = (2 * EARTH_RADIUS 
-    #         * math.asin( math.sqrt(
-    #         ( math.sin(
-    #             ( latitude02 - latitude01 ) / 2
-    #             ) ** 2 ) 
-    #         + (math.cos( latitude01 ) 
-    #         * math.cos( latitude02 ) 
-    #         * (math.sin(( longitude02 - longitude01 ) / 2))**2
-    #         ))))
-    #         return render(request, "result.html", {"result": distance})
-    #     else:
-    #         errorMessage = "Please ensure that inputs are integer or floats."
-    #         return render(request, "result.html", {"result": errorMessage})
-
-
-# class ViewSet(viewsets.ModelViewSet):
-#     queryset = 
 
 
 def calc_distance(longitude01, latitude01, longitude02, latitude02):
